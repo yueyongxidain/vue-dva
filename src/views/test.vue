@@ -1,15 +1,27 @@
 <template>
-  <div class="home">组件嵌套</div>
+  <el-card shadow="hover">
+    <div class="home">{{count}}</div>
+    <button @click="increment">+</button>
+  </el-card>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
   name: "home",
-  components: {
-    HelloWorld
+  components: {},
+  computed: {
+    count() {
+      return this.$store.state.test.count;
+    }
+  },
+  methods: {
+    increment() {
+      this.$store.commit("test/save", {
+        count: this.count + 1
+      });
+    }
   }
 };
 </script>

@@ -8,8 +8,8 @@ let modules = {}
 function LoopRouter(config) {
     if (config instanceof Array) {
         return config.map((ele) => {
-            if (ele.module)
-                modules[ele.name] = ele.module
+            if (ele.module&&ele.moduleName)
+                modules[ele.moduleName] = ele.module
             //如果有子元素就递归
             if (ele.children) {
                 return {
@@ -33,7 +33,6 @@ function LoopRouter(config) {
 
 function Create(config) {
     routes = LoopRouter(config)
-    console.log(routes)
     return {
         router: new Router({
             routes: routes
@@ -49,13 +48,15 @@ function Create(config) {
 const routerConfig = [
     {
         path: '/',
+        moduleName:'Home',
         name: '根菜单',
-        module: require('../modules/test.js').default,   //vuex模块
+        module: require('../modules/home.js').default,   //vuex模块
         component: resolve => require(['../views/Home.vue'], resolve), //组件
         children: [
             {
                 path: '/test',
                 name: '测试菜单',
+                moduleName:'test',
                 module: require('../modules/test1.js').default,   //vuex模块
                 component: resolve => require(['../views/test.vue'], resolve) //组件
             }
