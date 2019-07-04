@@ -58,7 +58,7 @@ const routerConfig = [
                 name: '测试菜单',
                 moduleName:'test',
                 module: require('../modules/test1.js').default,   //vuex模块
-                component: resolve => require(['../views/test.vue'], resolve) //组件
+                component: resolve => require(['@/components/test.vue'], resolve) //组件
             }
         ]
     }
