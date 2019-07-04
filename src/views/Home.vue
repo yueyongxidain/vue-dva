@@ -6,7 +6,12 @@
       </el-header>
       <el-container>
         <el-aside style="background:#FFFFFF;max-width:200px;width:auto">
-          <el-menu class="el-menu-vertical-demo" :router="true" :collapse="isCollapse">
+          <el-menu
+            class="el-menu-vertical-demo"
+            :router="true"
+            :collapse="isCollapse"
+            :default-active="path"
+          >
             <Menus :trees="trees" />
           </el-menu>
         </el-aside>
@@ -31,6 +36,10 @@
 }
 .el-aside {
   overflow: hidden !important;
+}
+.el-menu-item.is-active {
+  color: #409eff;
+  background-color: #ecf5ff;
 }
 </style>
 
@@ -58,6 +67,9 @@ export default {
   computed: {
     count() {
       return this.$store.state.test.count;
+    },
+    path() {
+      return window.location.hash.split("#")[1];
     }
   },
   mounted: function() {
